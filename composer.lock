@@ -1,20 +1,20 @@
 {
-    "_readme": [
-        "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
-        "This file is @generated automatically"
-    ],
-    "content-hash": "a292ea5ba576c8059f61722e08ee2046",
-    "packages": [
-        {
-            "name": "composer/package-versions-deprecated",
-            "version": "1.11.99.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/composer/package-versions-deprecated.git",
-                "reference": "b174585d1fe49ceed21928a945138948cb394600"
-            },
-            "dist": {
+  "_readme": [
+    "This file locks the dependencies of your project to a known state",
+    "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+    "This file is @generated automatically"
+  ],
+  "content-hash": "2d8808bd7844d7e1692161ba58fbd1e8",
+  "packages": [
+    {
+      "name": "composer/package-versions-deprecated",
+      "version": "1.11.99.4",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/composer/package-versions-deprecated.git",
+        "reference": "b174585d1fe49ceed21928a945138948cb394600"
+      },
+      "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/composer/package-versions-deprecated/zipball/b174585d1fe49ceed21928a945138948cb394600",
                 "reference": "b174585d1fe49ceed21928a945138948cb394600",
@@ -535,26 +535,111 @@
             "funding": [
                 {
                     "url": "https://github.com/Seldaek",
-                    "type": "github"
+                  "type": "github"
                 },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/monolog/monolog",
-                    "type": "tidelift"
-                }
+              {
+                "url": "https://tidelift.com/funding/github/packagist/monolog/monolog",
+                "type": "tidelift"
+              }
             ],
-            "time": "2021-07-23T07:42:52+00:00"
+          "time": "2021-07-23T07:42:52+00:00"
         },
-        {
-            "name": "phpdocumentor/reflection-common",
-            "version": "2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpDocumentor/ReflectionCommon.git",
-                "reference": "1d01c49d4ed62f25aa84a747ad35d5a16924662b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionCommon/zipball/1d01c49d4ed62f25aa84a747ad35d5a16924662b",
+    {
+      "name": "php-edifact/edifact-generator",
+      "version": "1.0.7",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/php-edifact/edifact-generator.git",
+        "reference": "4f50409c45148c5ec22d4ea5dc8bffe2d08b55db"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/php-edifact/edifact-generator/zipball/4f50409c45148c5ec22d4ea5dc8bffe2d08b55db",
+        "reference": "4f50409c45148c5ec22d4ea5dc8bffe2d08b55db",
+        "shasum": ""
+      },
+      "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.14",
+        "phpunit/phpunit": "~8.0",
+        "sabas/edifact": "^0.4.1"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "EDI\\Generator\\": "src/Generator/"
+        },
+        "classmap": [
+          "src/"
+        ]
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "LGPL-3.0+"
+      ],
+      "description": "EDIFACT message generators",
+      "homepage": "https://github.com/php-edifact/edifact-generator",
+      "keywords": [
+        "edi",
+        "edifact",
+        "generator",
+        "message"
+      ],
+      "support": {
+        "issues": "https://github.com/php-edifact/edifact-generator/issues",
+        "source": "https://github.com/php-edifact/edifact-generator/tree/1.0.7"
+      },
+      "time": "2020-01-30T17:45:55+00:00"
+    },
+    {
+      "name": "php-edifact/edifact-mapping",
+      "version": "0.3.2",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/php-edifact/edifact-mapping.git",
+        "reference": "f1c150fc8de7056a25d3b48f52baee24fd57ddc7"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/php-edifact/edifact-mapping/zipball/f1c150fc8de7056a25d3b48f52baee24fd57ddc7",
+        "reference": "f1c150fc8de7056a25d3b48f52baee24fd57ddc7",
+        "shasum": ""
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "EDI\\Mapping\\": "src/Mapping/"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "LGPL-3.0+"
+      ],
+      "description": "XML mappings from UNTDID",
+      "homepage": "https://github.com/php-edifact/edifact-mapping",
+      "keywords": [
+        "UNECE",
+        "edi",
+        "edifact",
+        "mapping",
+        "message"
+      ],
+      "support": {
+        "issues": "https://github.com/php-edifact/edifact-mapping/issues",
+        "source": "https://github.com/php-edifact/edifact-mapping/tree/master"
+      },
+      "time": "2018-03-24T23:02:03+00:00"
+    },
+    {
+      "name": "phpdocumentor/reflection-common",
+      "version": "2.2.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/phpDocumentor/ReflectionCommon.git",
+        "reference": "1d01c49d4ed62f25aa84a747ad35d5a16924662b"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/phpDocumentor/ReflectionCommon/zipball/1d01c49d4ed62f25aa84a747ad35d5a16924662b",
                 "reference": "1d01c49d4ed62f25aa84a747ad35d5a16924662b",
                 "shasum": ""
             },
@@ -943,26 +1028,90 @@
             "description": "Common interface for logging libraries",
             "homepage": "https://github.com/php-fig/log",
             "keywords": [
-                "log",
-                "psr",
-                "psr-3"
+              "log",
+              "psr",
+              "psr-3"
             ],
-            "support": {
-                "source": "https://github.com/php-fig/log/tree/1.1.4"
-            },
-            "time": "2021-05-03T11:20:27+00:00"
+          "support": {
+            "source": "https://github.com/php-fig/log/tree/1.1.4"
+          },
+          "time": "2021-05-03T11:20:27+00:00"
+        },
+    {
+      "name": "sabas/edifact",
+      "version": "0.5.1",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/php-edifact/edifact.git",
+        "reference": "6c9af6b5f4fc1bed88226d5948a3725c8096ccea"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/php-edifact/edifact/zipball/6c9af6b5f4fc1bed88226d5948a3725c8096ccea",
+        "reference": "6c9af6b5f4fc1bed88226d5948a3725c8096ccea",
+        "shasum": ""
+      },
+      "require": {
+        "ext-json": "*",
+        "ext-simplexml": "*",
+        "php": ">=7.0.0",
+        "voku/arrayy": "~7.1"
+      },
+      "require-dev": {
+        "php-edifact/edifact-mapping": "dev-master",
+        "phpunit/phpunit": "~6.0"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "EDI\\": "src/EDI/"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "LGPL-3.0-or-later"
+      ],
+      "authors": [
+        {
+          "name": "Stefano Sabatini",
+          "email": "sabas88@gmail.com",
+          "homepage": "http://stefanosabatini.eu",
+          "role": "Developer"
         },
         {
-            "name": "sensio/framework-extra-bundle",
-            "version": "v6.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "3f5b6490878f8a70ba702e9692007cf979b42f0e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/3f5b6490878f8a70ba702e9692007cf979b42f0e",
+          "name": "Uldis Nelsons",
+          "role": "Developer"
+        },
+        {
+          "name": "Emil Vikström",
+          "role": "Developer"
+        }
+      ],
+      "description": "Tools in PHP for UN/EDIFACT",
+      "homepage": "https://github.com/php-edifact/edifact",
+      "keywords": [
+        "container",
+        "edi",
+        "edifact",
+        "message"
+      ],
+      "support": {
+        "issues": "https://github.com/php-edifact/edifact/issues",
+        "source": "https://github.com/php-edifact/edifact/tree/master"
+      },
+      "time": "2020-02-26T19:38:56+00:00"
+    },
+    {
+      "name": "sensio/framework-extra-bundle",
+      "version": "v6.2.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
+        "reference": "3f5b6490878f8a70ba702e9692007cf979b42f0e"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/3f5b6490878f8a70ba702e9692007cf979b42f0e",
                 "reference": "3f5b6490878f8a70ba702e9692007cf979b42f0e",
                 "shasum": ""
             },
@@ -6097,26 +6246,109 @@
             "funding": [
                 {
                     "url": "https://github.com/fabpot",
-                    "type": "github"
+                  "type": "github"
                 },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/twig/twig",
-                    "type": "tidelift"
-                }
+              {
+                "url": "https://tidelift.com/funding/github/packagist/twig/twig",
+                "type": "tidelift"
+              }
             ],
-            "time": "2021-05-16T12:14:13+00:00"
+          "time": "2021-05-16T12:14:13+00:00"
+        },
+    {
+      "name": "voku/arrayy",
+      "version": "7.8.13",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/voku/Arrayy.git",
+        "reference": "ffaf679f3cb730c2706aa84be8c051e627999891"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/voku/Arrayy/zipball/ffaf679f3cb730c2706aa84be8c051e627999891",
+        "reference": "ffaf679f3cb730c2706aa84be8c051e627999891",
+        "shasum": ""
+      },
+      "require": {
+        "ext-json": "*",
+        "php": ">=7.0.0",
+        "phpdocumentor/reflection-docblock": "~4.3 || ~5.0",
+        "symfony/polyfill-mbstring": "~1.0"
+      },
+      "require-dev": {
+        "phpunit/phpunit": "~6.0 || ~7.0 || ~9.0"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "Arrayy\\": "src/"
+        },
+        "files": [
+          "src/Create.php"
+        ]
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "authors": [
+        {
+          "name": "Lars Moelleken",
+          "email": "lars@moelleken.org",
+          "homepage": "https://www.moelleken.org/",
+          "role": "Maintainer"
+        }
+      ],
+      "description": "Array manipulation library for PHP, called Arrayy!",
+      "keywords": [
+        "Arrayy",
+        "array",
+        "helpers",
+        "manipulation",
+        "methods",
+        "utility",
+        "utils"
+      ],
+      "support": {
+        "docs": "http://voku.github.io/Arrayy/index.html",
+        "issues": "https://github.com/voku/Arrayy/issues",
+        "source": "https://github.com/voku/Arrayy"
+      },
+      "funding": [
+        {
+          "url": "https://www.paypal.me/moelleken",
+          "type": "custom"
         },
         {
-            "name": "webmozart/assert",
-            "version": "1.10.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/webmozarts/assert.git",
-                "reference": "6964c76c7804814a842473e0c8fd15bab0f18e25"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/webmozarts/assert/zipball/6964c76c7804814a842473e0c8fd15bab0f18e25",
+          "url": "https://github.com/voku",
+          "type": "github"
+        },
+        {
+          "url": "https://opencollective.com/arrayy",
+          "type": "open_collective"
+        },
+        {
+          "url": "https://www.patreon.com/voku",
+          "type": "patreon"
+        },
+        {
+          "url": "https://tidelift.com/funding/github/packagist/voku/arrayy",
+          "type": "tidelift"
+        }
+      ],
+      "time": "2021-10-23T22:10:52+00:00"
+    },
+    {
+      "name": "webmozart/assert",
+      "version": "1.10.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/webmozarts/assert.git",
+        "reference": "6964c76c7804814a842473e0c8fd15bab0f18e25"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/webmozarts/assert/zipball/6964c76c7804814a842473e0c8fd15bab0f18e25",
                 "reference": "6964c76c7804814a842473e0c8fd15bab0f18e25",
                 "shasum": ""
             },
@@ -8669,9 +8901,9 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.2.5",
-        "ext-ctype": "*",
-        "ext-iconv": "*"
+      "php": ">=8.0",
+      "ext-ctype": "*",
+      "ext-iconv": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.1.0"

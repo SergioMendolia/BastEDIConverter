@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Cette grammaire n'est plus utilisée et a été remplacée par FMPXMLRESULT. -->
+<FMPDSORESULT xmlns="http://www.filemaker.com/fmpdsoresult">
+    <ERRORCODE>0</ERRORCODE>
+    <DATABASE>BASTAC-factures en cours.fmp12</DATABASE>
+    <LAYOUT>SAISIE</LAYOUT>
+    <ROW MODID="0" RECORDID="10525">
+        <Institution></Institution>
+        <prénom>Cédric</prénom>
+        <Nom>SUILLOT</Nom>
+        <rue>Jomini 3</rue>
+        <NPA>1004</NPA>
+        <ville>Lausanne</ville>
+        <AUTEUR>
+            <DATA>RADIGUET Raymond</DATA>
+        </AUTEUR>
+        <TITRE>
+            <DATA>Le diable au corps</DATA>
+        </TITRE>
+        <QUANTITE>
+            <DATA>1</DATA>
+        </QUANTITE>
+        <PRIX_UNITAIRE>
+            <DATA>Fr 11.80</DATA>
+        </PRIX_UNITAIRE>
+        <PRIX_BRUT>
+            <DATA>Fr 11.80</DATA>
+        </PRIX_BRUT>
+        <REMISE_%>
+        <DATA>0</DATA>
+    </REMISE_%>
+    <REMISE_FRS>
+        <DATA>Fr 0.00</DATA>
+    </REMISE_FRS>
+    <PRIX_NET>
+        <DATA>Fr 11.80</DATA>
+    </PRIX_NET>
+    <EAN>
+        <DATA>9782070373918</DATA>
+    </EAN>
+    <EDITEUR>
+        <DATA>gallimard</DATA>
+    </EDITEUR>
+    <V.REF>
+        <DATA></DATA>
+    </V.REF>
+    <TVA_TAUX>
+        <DATA>2.5</DATA>
+    </TVA_TAUX>
+</ROW>
+        </FMPDSORESULT>

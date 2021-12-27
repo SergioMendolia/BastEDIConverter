@@ -47,6 +47,12 @@
     "phar-io/version": {
         "version": "3.1.0"
     },
+    "php-edifact/edifact-generator": {
+        "version": "1.0.7"
+    },
+    "php-edifact/edifact-mapping": {
+        "version": "0.3.2"
+    },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
     },
@@ -102,6 +108,9 @@
     },
     "psr/log": {
         "version": "1.1.4"
+    },
+    "sabas/edifact": {
+        "version": "0.5.1"
     },
     "sebastian/cli-parser": {
         "version": "1.0.1"
@@ -513,6 +522,9 @@
     },
     "twig/twig": {
         "version": "v3.3.2"
+    },
+    "voku/arrayy": {
+        "version": "7.8.13"
     },
     "webmozart/assert": {
         "version": "1.10.0"
