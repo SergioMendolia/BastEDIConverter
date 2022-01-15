@@ -8,6 +8,11 @@ class BastaXMLCleaner
     public function cleanXML($xmlstring)
     {
         $xmlstring = str_replace('REMISE_%', 'REMISE_PC', $xmlstring);
+        $xmlstring = str_replace("n°_de_bon", 'no_de_bon', $xmlstring);
+        $xmlstring = str_replace("V.REF>", 'VREF>', $xmlstring);
+        $xmlstring = str_replace("prénom>", 'prenom>', $xmlstring);
+        $xmlstring = str_replace("remarques,_réponses>", 'remarques_réponses>', $xmlstring);
+        $xmlstring = str_replace("frais_d'envoi>", 'frais_denvoi>', $xmlstring);
         $arr = simplexml_load_string($xmlstring);
         $arr = json_encode($arr);
         $arr = json_decode($arr, true);

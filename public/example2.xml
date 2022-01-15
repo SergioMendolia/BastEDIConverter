@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Cette grammaire n'est plus utilisée et a été remplacée par FMPXMLRESULT. -->
+<FMPDSORESULT xmlns="http://www.filemaker.com/fmpdsoresult">
+    <ERRORCODE>0</ERRORCODE>
+    <DATABASE>BASTAC-factures en cours.fmp12</DATABASE>
+    <LAYOUT>FACTURE COURTE</LAYOUT>
+    <ROW MODID="1" RECORDID="10525">
+        <date_facture>
+            <DATA>7 septembre 2021</DATA>
+            <DATA></DATA>
+            <DATA></DATA>
+            <DATA></DATA>
+            <DATA></DATA>
+        </date_facture>
+        <Expéditeur>Librairie BASTA!</Expéditeur>
+        <frais_d'envoi>Fr 2.50
+    </frais_d'envoi>
+    <Institution></Institution>
+    <Madame-Monsieur></Madame-Monsieur>
+    <n°_de_bon>
+</n°_de_bon>
+<NET_A_PAYER>Fr 28.80</NET_A_PAYER>
+<Nom>SUILLOT</Nom><NPA>1004</NPA>
+<numéro_de_facture>
+<DATA>26972</DATA>
+<DATA></DATA>
+<DATA></DATA>
+<DATA></DATA>
+<DATA></DATA>
+</numéro_de_facture>
+<prénom>Cédric</prénom><remarques,_réponses></remarques,_réponses><rue>Jomini 3</rue>
+<SOUS_TOTAL_BRUT>Fr 26.30</SOUS_TOTAL_BRUT>
+<SOUS_TOTAL_REMISE>Fr 0.00</SOUS_TOTAL_REMISE>
+<SOUS_TOTAL_TVA>Fr 0.66</SOUS_TOTAL_TVA>
+<type_doc.>Facture</type_doc.>
+<ville>Lausanne</ville><AUTEUR>
+<DATA>RADIGUET Raymond</DATA>
+<DATA>BORGES J.-L.</DATA>
+</AUTEUR>
+<EAN>
+<DATA>9782070373918</DATA>
+<DATA>9782070296668</DATA>
+</EAN>
+<PRIX_BRUT>
+<DATA>Fr 11.80</DATA>
+<DATA>Fr 14.50</DATA>
+</PRIX_BRUT>
+<PRIX_NET>
+<DATA>Fr 11.80</DATA>
+<DATA>Fr 14.50</DATA>
+</PRIX_NET>
+<PRIX_UNITAIRE>
+<DATA>Fr 11.80</DATA>
+<DATA>Fr 14.50</DATA>
+</PRIX_UNITAIRE>
+<QUANTITE>
+<DATA>1</DATA>
+<DATA>1</DATA>
+</QUANTITE>
+<REMISE_%><DATA>0</DATA><DATA></DATA></REMISE_%>
+<REMISE_FRS>
+<DATA>Fr 0.00</DATA>
+<DATA>Fr 0.00</DATA>
+</REMISE_FRS>
+<TITRE>
+<DATA>Le diable au corps</DATA>
+<DATA>L&apos;Aleph</DATA>
+</TITRE>
+<TVA_TAUX>
+<DATA>2.5</DATA>
+<DATA>2.5</DATA>
+</TVA_TAUX>
+<V.REF>
+<DATA></DATA>
+<DATA></DATA>
+</V.REF></ROW>
+<ROW MODID="1" RECORDID="10526">
+<date_facture>
+    <DATA>31 décembre 2021</DATA>
+    <DATA></DATA>
+    <DATA></DATA>
+    <DATA></DATA>
+    <DATA></DATA>
+</date_facture>
+<Expéditeur>Librairie BASTA!</Expéditeur>
+<frais_d'envoi>Fr 7.00
+</frais_d'envoi>
+<Institution></Institution><Madame-Monsieur></Madame-Monsieur>
+<n°_de_bon></n°_de_bon><NET_A_PAYER>Fr 76.90</NET_A_PAYER>
+<Nom>JOYE</Nom><NPA>1004</NPA><numéro_de_facture>
+<DATA>26973</DATA>
+<DATA></DATA>
+<DATA></DATA>
+<DATA></DATA>
+<DATA></DATA>
+</numéro_de_facture>
+<prénom>Fabienne</prénom><remarques,_réponses></remarques,_réponses><rue>Jomini 3</rue>
+<SOUS_TOTAL_BRUT>Fr 69.90</SOUS_TOTAL_BRUT><SOUS_TOTAL_REMISE>Fr 0.00</SOUS_TOTAL_REMISE><SOUS_TOTAL_TVA>Fr 1.75
+</SOUS_TOTAL_TVA>
+<type_doc.>Facture</type_doc.><ville>Lausanne</ville><AUTEUR>
+<DATA></DATA>
+<DATA>HANDKE P.</DATA>
+<DATA>DAHL R.</DATA>
+<DATA>HIMES C.</DATA>
+</AUTEUR>
+<EAN>
+<DATA></DATA>
+<DATA></DATA>
+<DATA></DATA>
+<DATA></DATA>
+</EAN>
+<PRIX_BRUT>
+<DATA>Fr 41.70</DATA>
+<DATA>Fr 8.70</DATA>
+<DATA>Fr 10.80</DATA>
+<DATA>Fr 8.70</DATA>
+</PRIX_BRUT>
+<PRIX_NET>
+<DATA>Fr 41.70</DATA>
+<DATA>Fr 8.70</DATA>
+<DATA>Fr 10.80</DATA>
+<DATA>Fr 8.70</DATA>
+</PRIX_NET>
+<PRIX_UNITAIRE>
+<DATA>Fr 41.70</DATA>
+<DATA>Fr 8.70</DATA>
+<DATA>Fr 10.80</DATA>
+<DATA>Fr 8.70</DATA>
+</PRIX_UNITAIRE>
+<QUANTITE>
+<DATA>1</DATA>
+<DATA>1</DATA>
+<DATA>1</DATA>
+<DATA>1</DATA>
+</QUANTITE>
+<REMISE_%><DATA></DATA><DATA></DATA><DATA></DATA><DATA></DATA></REMISE_%>
+<REMISE_FRS>
+<DATA>Fr 0.00</DATA>
+<DATA>Fr 0.00</DATA>
+<DATA>Fr 0.00</DATA>
+<DATA>Fr 0.00</DATA>
+</REMISE_FRS>
+<TITRE>
+<DATA>Monde des fées dans l&apos;occident médiéval</DATA>
+<DATA>La courte lettre pour un long adieu</DATA>
+<DATA>Mon oncle Oswald</DATA>
+<DATA>Couché dans le pain</DATA>
+</TITRE>
+<TVA_TAUX>
+<DATA>2.5</DATA>
+<DATA>2.5</DATA>
+<DATA>2.5</DATA>
+<DATA>2.5</DATA>
+</TVA_TAUX>
+<V.REF>
+<DATA></DATA>
+<DATA></DATA>
+<DATA></DATA>
+<DATA></DATA>
+</V.REF></ROW>
+<ROW MODID="2" RECORDID="10527">
+<date_facture>
+    <DATA>31 décembre 2021</DATA>
+    <DATA></DATA>
+    <DATA></DATA>
+    <DATA></DATA>
+    <DATA></DATA>
+</date_facture>
+<Expéditeur>Librairie BASTA!</Expéditeur>
+<frais_d'envoi>Fr 14.00
+</frais_d'envoi><Institution></Institution><Madame-Monsieur></Madame-Monsieur><n°_de_bon></n°_de_bon><NET_A_PAYER>Fr
+164.80
+</NET_A_PAYER><Nom>SUILLOT</Nom><NPA>1004</NPA><numéro_de_facture>
+<DATA>26974</DATA>
+<DATA></DATA>
+<DATA></DATA>
+<DATA></DATA>
+<DATA></DATA>
+</numéro_de_facture><prénom>Cédric</prénom><remarques,_réponses></remarques,_réponses><rue>Jomini 3
+</rue><SOUS_TOTAL_BRUT>Fr 152.70</SOUS_TOTAL_BRUT><SOUS_TOTAL_REMISE>Fr 1.90</SOUS_TOTAL_REMISE><SOUS_TOTAL_TVA>Fr
+3.82
+</SOUS_TOTAL_TVA><type_doc.>Facture</type_doc.><ville>Lausanne</ville><AUTEUR>
+<DATA>Baccus</DATA>
+<DATA>MIQUEL J.</DATA>
+<DATA>Wells, Herbert George</DATA>
+<DATA>brisson d.</DATA>
+<DATA>henchoz m.</DATA>
+<DATA>Nadon Yves</DATA>
+<DATA>frison roche</DATA>
+<DATA>POIVRE D&apos;ARVOR P.</DATA>
+<DATA>MERIMEE</DATA>
+<DATA>Barillié</DATA>
+</AUTEUR><EAN>
+<DATA>9782290338858</DATA>
+<DATA></DATA>
+<DATA>9782070514397</DATA>
+<DATA>9782748506075</DATA>
+<DATA>9782606005221</DATA>
+<DATA>9782895402596</DATA>
+<DATA></DATA>
+<DATA></DATA>
+<DATA></DATA>
+<DATA>9782070326419</DATA>
+</EAN><PRIX_BRUT>
+<DATA>Fr 4.00</DATA>
+<DATA>Fr 62.80</DATA>
+<DATA>Fr 13.10</DATA>
+<DATA>Fr 12.90</DATA>
+<DATA>Fr 25.00</DATA>
+<DATA>Fr 16.20</DATA>
+<DATA>Fr 6.00</DATA>
+<DATA>Fr 0.00</DATA>
+<DATA>Fr 0.00</DATA>
+<DATA>Fr 12.70</DATA>
+</PRIX_BRUT><PRIX_NET>
+<DATA>Fr 3.40</DATA>
+<DATA>Fr 62.80</DATA>
+<DATA>Fr 13.10</DATA>
+<DATA>Fr 12.90</DATA>
+<DATA>Fr 25.00</DATA>
+<DATA>Fr 16.20</DATA>
+<DATA>Fr 4.70</DATA>
+<DATA>Fr 0.00</DATA>
+<DATA>Fr 0.00</DATA>
+<DATA>Fr 12.70</DATA>
+</PRIX_NET><PRIX_UNITAIRE>
+<DATA>Fr 4.00</DATA>
+<DATA>Fr 31.40</DATA>
+<DATA>Fr 13.10</DATA>
+<DATA>Fr 12.90</DATA>
+<DATA>Fr 25.00</DATA>
+<DATA>Fr 16.20</DATA>
+<DATA>Fr 6.00</DATA>
+<DATA></DATA>
+<DATA></DATA>
+<DATA>Fr 12.70</DATA>
+</PRIX_UNITAIRE><QUANTITE>
+<DATA>1</DATA>
+<DATA>2</DATA>
+<DATA>1</DATA>
+<DATA>1</DATA>
+<DATA>1</DATA>
+<DATA>1</DATA>
+<DATA>1</DATA>
+<DATA>3</DATA>
+<DATA>1</DATA>
+<DATA>1</DATA>
+</QUANTITE><REMISE_%><DATA>14</DATA><DATA></DATA><DATA></DATA><DATA></DATA><DATA></DATA><DATA></DATA><DATA>21
+</DATA><DATA></DATA><DATA></DATA><DATA></DATA></REMISE_%><REMISE_FRS>
+<DATA>Fr 0.60</DATA>
+<DATA>Fr 0.00</DATA>
+<DATA>Fr 0.00</DATA>
+<DATA>Fr 0.00</DATA>
+<DATA>Fr 0.00</DATA>
+<DATA>Fr 0.00</DATA>
+<DATA>Fr 1.30</DATA>
+<DATA>Fr 0.00</DATA>
+<DATA>Fr 0.00</DATA>
+<DATA>Fr 0.00</DATA>
+</REMISE_FRS><TITRE>
+<DATA>Grammaire française</DATA>
+<DATA>L&apos;enfant aux pivoines</DATA>
+<DATA>La machine à explorer le temps</DATA>
+<DATA>Gros sur la tomate</DATA>
+<DATA>Sautecroche vol 1</DATA>
+<DATA>Mon chien gruyère</DATA>
+<DATA>La montagne aux écritures</DATA>
+<DATA>Les enfants de l&apos;aube</DATA>
+<DATA>Carmen - Les âmes du purgatoire</DATA>
+<DATA>Singes</DATA>
+</TITRE><TVA_TAUX>
+<DATA>2.5</DATA>
+<DATA>2.5</DATA>
+<DATA>2.5</DATA>
+<DATA>2.5</DATA>
+<DATA>2.5</DATA>
+<DATA>2.5</DATA>
+<DATA>2.5</DATA>
+<DATA>2.5</DATA>
+<DATA>2.5</DATA>
+<DATA>2.5</DATA>
+</TVA_TAUX><V.REF>
+<DATA>cde tél du 26974</DATA>
+<DATA></DATA>
+<DATA>CA00000012</DATA>
+<DATA></DATA>
+<DATA>23.5.2018</DATA>
+<DATA>30.5.2007</DATA>
+<DATA></DATA>
+<DATA></DATA>
+<DATA></DATA>
+<DATA></DATA>
+</V.REF></ROW></FMPDSORESULT>
