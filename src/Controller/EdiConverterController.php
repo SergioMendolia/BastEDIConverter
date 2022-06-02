@@ -32,14 +32,14 @@ class EdiConverterController extends AbstractController
             $arr = $cleaner->cleanXML($get);
 
             $edis = [];
-            foreach ($arr['ROW'] as $factLine => $facture) {
+            $facture = $arr['ROW'];
 
                 $interchange = new Interchange('UNB-Identifier-Sender', 'UNB-Identifier-Receiver');
                 $interchange->setCharset('UNOC', '3');
 
                 $tz = new \DateTimeZone('Europe/Paris');
 
-                $dt = reset($facture['date_facture']);
+            $dt = $facture['date_facture'];
 
                 $dt = str_replace(
                     ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre',],
@@ -93,9 +93,8 @@ class EdiConverterController extends AbstractController
                 $encoder = new \EDI\Encoder($interchange->addMessage($orders)->getComposed(), true);
                 $encoder->setUNA(":+,? '");
 
-                $edis['fact' . $factLine] = $encoder->get();
+            $edis['fact'] = $encoder->get();
 
-            }
 
             $zip = new \ZipArchive();
             $zipName = 'facture.zip';
