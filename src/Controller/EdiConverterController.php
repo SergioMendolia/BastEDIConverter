@@ -68,9 +68,9 @@ class EdiConverterController extends AbstractController
                     )
                     ->setDeliveryTerms('CAF');
 
-                foreach ($facture['NO_CPTE_BCU'] as $key => $EAN) {
+                foreach ($facture['EAN'] as $key => $EAN) {
 
-                    $convertArrays = ['QUANTITE', 'PRIX_UNITAIRE', 'TITRE', 'NO_CPTE_BCU', 'AUTEUR', 'TVA_TAUX', 'PRIX_BRUT', 'PRIX_NET'];
+                    $convertArrays = ['QUANTITE', 'PRIX_UNITAIRE', 'TITRE', 'EAN', 'AUTEUR', 'TVA_TAUX', 'PRIX_BRUT', 'PRIX_NET'];
                     foreach ($convertArrays as $convertArray) {
                         if (is_array($facture[$convertArray][$key])) {
                             $facture[$convertArray][$key] = null;
@@ -79,10 +79,10 @@ class EdiConverterController extends AbstractController
                     }
 
                     $item = new Item();
-                    $item->setPosition(($key + 1), $facture['NO_CPTE_BCU'][$key] ?? $key)
+                    $item->setPosition(($key + 1), $facture['EAN'][$key] ?? $key)
                         ->setQuantity($facture['QUANTITE'][$key])
                         ->setSpecificationText($facture['TITRE'][$key] . ' ' . $facture['AUTEUR'][$key] . ' (' . $facture['PRIX_UNITAIRE'][$key] . ')')
-                        ->setAdditionalText('TVA' . $facture['TVA_TAUX'][$key])
+                        ->setAdditionalText('TVA' . $facture['TVA_TAUX'][$key] . '-No compte:' . $facture['NO_CPTE_BCU'][$key])
                         ->setGrossPrice($facture['PRIX_BRUT'][$key])
                         ->setNetPrice($facture['PRIX_NET'][$key]);
 
