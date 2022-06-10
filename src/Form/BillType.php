@@ -30,7 +30,7 @@ class BillType extends AbstractType
                 'constraints' => [
                     new File([])
                 ],
-            ])->add('submit', SubmitType::class)// ...
+            ])->add('submit', SubmitType::class, ['label' => 'Balance la sauce!'])// ...
         ;
     }
 }

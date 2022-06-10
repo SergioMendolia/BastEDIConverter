@@ -9,6 +9,8 @@ security:
         users_in_memory:
             memory:
                 users:
+                    ## password: basta
+                    ## bcrypt
                     basta: { password: '$2y$10$prludlodCYCFA.18lnMrv.kx12GB/RynjVKhbfkpMIrOVxlLUi//a', roles: [ 'ROLE_ADMIN' ] }
     firewalls:
         main:

@@ -8,7 +8,8 @@ use EDI\Generator\Interchange;
 use EDI\Generator\Orders;
 use EDI\Generator\Orders\Item;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +19,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class EdiConverterController extends AbstractController
 {
     #[Route('/', name: 'edi_converter')]
-    public function index(Request $request, KernelInterface $appKernel, BastaXMLCleaner $cleaner): Response
+    public function index(Request $request, KernelInterface $appKernel, BastaXMLCleaner $cleaner, ParameterBagInterface $parameterBag): Response
     {
         $form = $this->createForm(BillType::class);
         $form->handleRequest($request);
+        $facturesDir = $parameterBag->get('kernel.project_dir') . '/factures/';
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $brochureFile */
@@ -88,31 +90,63 @@ class EdiConverterController extends AbstractController
 
                 }
 
-                $orders->compose();
+            $orders->compose();
 
-                $encoder = new \EDI\Encoder($interchange->addMessage($orders)->getComposed(), true);
-                $encoder->setUNA(":+,? '");
+            $encoder = new \EDI\Encoder($interchange->addMessage($orders)->getComposed(), true);
+            $encoder->setUNA(":+,? '");
 
             $edis['fact'] = $encoder->get();
 
-
-            $zip = new \ZipArchive();
-            $zipName = 'facture.zip';
-            if ($zip->open($zipName, \ZipArchive::CREATE) === TRUE) {
-                foreach ($edis as $filename => $fileContent) {
-                    $zip->addFromString($filename . '.edi', $fileContent);
-                }
-                $zip->close();
-            } else {
-                die($zipName . ' failed');
+            foreach ($edis as $filename => $fileContent) {
+                file_put_contents($facturesDir . date('Y-m-d_H.i.s') . '-' . $filename . '.edi', $fileContent);
             }
-            return new BinaryFileResponse($zipName);
+
+            $this->addFlash('success', "C'est dans la boîte!");
+
+            return $this->redirectToRoute('edi_converter');
+        }
+
+        $existingBills = [];
+        $previousBills = [];
+        $finder = new Finder();
+        $finder->files()->in($facturesDir);
+
+        $finder->files()->name('*.edi');
+        foreach ($finder as $file) {
+            $existingBills[$file->getFilename()] = $file->getRealPath();
+
+        }
+        $finder->files()->name('*.handled');
+        foreach ($finder as $file) {
+            $previousBills[$file->getFilename()] = $file->getRealPath();
         }
 
         //https://github.com/php-edifact/edifact-generator
 
         return $this->renderForm('edi_converter/index.html.twig', [
             'form' => $form,
+            'existing_bills' => $existingBills,
+            'previous_bills' => $previousBills,
         ]);
+    }
+
+    #[Route('/supprimer/{file}', name: 'remove_file')]
+    public function remove(Request $request, string $file, ParameterBagInterface $parameterBag): Response
+    {
+        $facturesDir = $parameterBag->get('kernel.project_dir') . '/factures/';
+
+        $finder = new Finder();
+        $finder->files()->in($facturesDir);
+
+        $finder->files()->name($file);
+        if ($finder->count() > 1) {
+            return $this->redirectToRoute('edi_converter');
+        }
+
+        foreach ($finder as $found) {
+            unlink($found->getPathname());
+        }
+
+        return $this->redirectToRoute('edi_converter');
     }
 }
