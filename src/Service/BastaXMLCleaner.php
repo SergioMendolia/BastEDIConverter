@@ -16,7 +16,6 @@ class BastaXMLCleaner
         $arr = simplexml_load_string($xmlstring);
         $arr = json_encode($arr);
         $arr = json_decode($arr, true);
-
         $arr = self::removeDataKeys($arr);
         $arr = self::explodeAttributes($arr);
 
