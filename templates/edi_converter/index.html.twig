@@ -50,6 +50,8 @@
                             <li class="m-1">🧾 {{ key }} <a href="{{ path('remove_file',{'file':key}) }}"
                                                             onclick="return confirm('Supprimer?')"
                                                             class="text-sm text-gray-300">Supprimer</a></li>
+                        {% else %}
+                            Oh ben y en a pas !
                         {% endfor %}
                     </ul>
                 </main>
