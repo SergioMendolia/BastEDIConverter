@@ -4,9 +4,9 @@ namespace App\Controller;
 
 use App\Form\BillType;
 use App\Service\BastaXMLCleaner;
+use App\Service\CustomItem;
 use EDI\Generator\Interchange;
-use EDI\Generator\Orders;
-use EDI\Generator\Orders\Item;
+use EDI\Generator\Invoic;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;
@@ -18,6 +18,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class EdiConverterController extends AbstractController
 {
+
+    private function cleanupPriceDegueu($price): float
+    {
+        $price = str_replace('Fr ', '', $price);
+        $price = (float)$price;
+
+        return $price;
+    }
+
     #[Route('/', name: 'edi_converter')]
     public function index(Request $request, KernelInterface $appKernel, BastaXMLCleaner $cleaner, ParameterBagInterface $parameterBag): Response
     {
@@ -36,37 +45,33 @@ class EdiConverterController extends AbstractController
             $edis = [];
             $facture = $arr['ROW'];
 
-                $interchange = new Interchange('UNB-Identifier-Sender', 'UNB-Identifier-Receiver');
-                $interchange->setCharset('UNOC', '3');
+            $interchange = new Interchange(' LIBRAIRIBASTA', 'VDBCUL01CHULU');
+            $interchange->setCharset('UNOC', '3');
 
                 $tz = new \DateTimeZone('Europe/Paris');
 
             $dt = $facture['date_facture'];
 
-                $dt = str_replace(
-                    ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre',],
-                    ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',],
-                    $dt
-                );
+            $dt = str_replace(
+                ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre',],
+                ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',],
+                $dt
+            );
 
-                $date = \DateTime::createFromFormat('d m Y', $dt, $tz);
-                $orders = new Orders();
-                $orders
-                    ->setOrderNumber(reset($facture['numéro_de_facture']))
-                    ->setContactPerson($facture['Expéditeur'])
-                    ->setMailAddress('chauderon@librairiebasta.ch')
-                    ->setPhoneNumber('+49123456789')
-                    ->setDeliveryDate($date)
-                    ->setDeliveryAddress(
-                        $facture["Institution"],
-                        $facture["Nom"] . ' ' . $facture["prenom"],
-                        '',
-                        $facture["rue"],
-                        $facture["NPA"],
-                        $facture["ville"],
-                        'CH'
-                    )
-                    ->setDeliveryTerms('CAF');
+            $date = \DateTime::createFromFormat('d m Y', $dt, $tz);
+            $orders = new Invoic(association: 'EAN008', release: '96A',);
+
+            $orders
+                ->setInvoiceNumber(reset($facture['numéro_de_facture']))
+                ->setInvoiceDate($date)
+                ->setInvoiceCurrency('CHF')
+                ->setContactPerson($facture['Expéditeur'])
+                ->setMailAddress('chauderon@librairiebasta.ch')
+                ->setPhoneNumber('+49123456789')
+                ->setBuyerAddress('BCU', sender: 'VDBCUL01CHULU')
+                ->setSupplierAddress('Librairie Basta!', sender: ' LIBRAIRIBASTA')
+                ->setTotalPositionsAmount($this->cleanupPriceDegueu($facture['SOUS_TOTAL_BRUT']))
+                ->setPayableAmount($this->cleanupPriceDegueu($facture['NET_A_PAYER']));
 
                 foreach ($facture['EAN'] as $key => $EAN) {
 
@@ -78,22 +83,28 @@ class EdiConverterController extends AbstractController
                         $facture[$convertArray][$key] = str_replace([',', ':', '?', ';', 'Fr.', "'"], ' ', $facture[$convertArray][$key]);
                     }
 
-                    $item = new Item();
+
+                    $item = new CustomItem();
                     $item->setPosition(($key + 1), $facture['EAN'][$key] ?? $key)
-                        ->setQuantity($facture['QUANTITE'][$key])
+                        ->setQuantity((int)$facture['QUANTITE'][$key], qualifier: '47')
                         ->setSpecificationText($facture['TITRE'][$key] . ' ' . $facture['AUTEUR'][$key] . ' (' . $facture['PRIX_UNITAIRE'][$key] . ')')
-                        ->setAdditionalText('TVA' . $facture['TVA_TAUX'][$key] . '-No compte:' . $facture['NO_CPTE_BCU'][$key])
-                        ->setGrossPrice($facture['PRIX_BRUT'][$key])
-                        ->setNetPrice($facture['PRIX_NET'][$key]);
+                        ->setAdditionalText('TVA' . $facture['TVA_TAUX'][$key])
+                        ->setGrossPrice($this->cleanupPriceDegueu($facture['PRIX_BRUT'][$key]))
+                        ->setNetPrice($this->cleanupPriceDegueu($facture['PRIX_NET'][$key]))
+                        ->setDeliveryNoteNumber('' . $facture['NO_CPTE_BCU'][$key]);
+                    $remise = is_array($facture['REMISE_PC'][$key]) ? '0' : $facture['REMISE_PC'][$key];
+                    if ($remise > 0) {
+                        $item->addDiscount($remise);
+                    }
 
                     $orders->addItem($item);
-
                 }
 
             $orders->compose();
-
-            $encoder = new \EDI\Encoder($interchange->addMessage($orders)->getComposed(), true);
+            $aComposed = $interchange->addMessage($orders)->compose();
+            $encoder = new \EDI\Encoder($aComposed->getComposed(), false);
             $encoder->setUNA(":+,? '");
+
 
             $edis['fact'] = $encoder->get();
 
