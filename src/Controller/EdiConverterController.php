@@ -21,7 +21,7 @@ class EdiConverterController extends AbstractController
 
     private function cleanupPriceDegueu($price): float
     {
-        $price = str_replace('Fr ', '', $price);
+        $price = str_replace(array('Fr ', ','), array('', '.'), $price);
         $price = (float)$price;
 
         return $price;
@@ -107,7 +107,7 @@ class EdiConverterController extends AbstractController
             $orders->compose();
             $aComposed = $interchange->addMessage($orders)->compose();
             $encoder = new \EDI\Encoder($aComposed->getComposed(), false);
-            $encoder->setUNA(":+,? '");
+            $encoder->setUNA(":+.? '");
 
 
             $edis['fact'] = $encoder->get();
