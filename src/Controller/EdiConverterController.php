@@ -59,7 +59,7 @@ class EdiConverterController extends AbstractController
             );
 
             $date = \DateTime::createFromFormat('d m Y', $dt, $tz);
-            $orders = new CustomInvoice(association: 'EAN008', release: '96A',);
+            $orders = new CustomInvoice(release: '96A', association: 'EAN008',);
 
             $orders
                 ->setInvoiceNumber(reset($facture['numéro_de_facture']))
@@ -114,6 +114,8 @@ class EdiConverterController extends AbstractController
             $edis['fact'] = $encoder->get();
 
             foreach ($edis as $filename => $fileContent) {
+                $fileContent = str_replace(array(',', 'MOA+:'), array('.', 'MOA+'), $fileContent);
+
                 file_put_contents($facturesDir . date('Y-m-d_H.i.s') . '-' . $filename . '.edi', $fileContent);
             }
 
