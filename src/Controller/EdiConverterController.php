@@ -108,7 +108,7 @@ class EdiConverterController extends AbstractController
             $orders->compose();
             $aComposed = $interchange->addMessage($orders)->compose();
             $encoder = new \EDI\Encoder($aComposed->getComposed(), false);
-            $encoder->setUNA(":+,? '");
+            $encoder->setUNA(":+.? '");
 
 
             $edis['fact'] = $encoder->get();

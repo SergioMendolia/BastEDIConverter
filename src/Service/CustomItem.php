@@ -40,8 +40,8 @@ class CustomItem extends Item
      */
     public function setMOANetPrice($netPrice)
     {
-        $this->netPrice = self::addMOASegment('203', $netPrice);
-        $this->addKeyToCompose('netPrice');
+        $this->netPrice2 = self::addMOASegment('203', $netPrice);
+        $this->addKeyToCompose('netPriceMOA');
         return $this;
     }
 
