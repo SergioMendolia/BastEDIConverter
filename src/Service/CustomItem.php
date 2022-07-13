@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use EDI\Generator\EdiFactNumber;
 use EDI\Generator\Invoic\Item;
 
 /**
@@ -42,6 +43,17 @@ class CustomItem extends Item
         $this->netPrice = self::addMOASegment('203', $netPrice);
         $this->addKeyToCompose('netPrice');
         return $this;
+    }
+
+    public static function addMOASegment($qualifier, $value)
+    {
+        return [
+            'MOA',
+            [
+                (string)$qualifier,
+                EdiFactNumber::convert($value),
+            ],
+        ];
     }
 
     public function setDeliveryNoteNumber($deliveryNoteNumber)
