@@ -91,7 +91,7 @@ class EdiConverterController extends AbstractController
                         ->setQuantity((int)$facture['QUANTITE'][$key], qualifier: '47')
                         ->setSpecificationText($facture['TITRE'][$key] . ' ' . $facture['AUTEUR'][$key] . ' (' . $facture['PRIX_UNITAIRE'][$key] . ')')
                         ->setAdditionalText('TVA' . $facture['TVA_TAUX'][$key])
-                        //->setGrossPrice($this->cleanupPriceDegueu($facture['PRIX_BRUT'][$key]))
+                        ->setGrossPrice($this->cleanupPriceDegueu($facture['PRIX_BRUT'][$key]))
                         ->setMOANetPrice($this->cleanupPriceDegueu($facture['PRIX_NET'][$key]));
                     if ($facture['VREF'][$key] !== '') {
                         $item->setDeliveryNoteNumber('' . $facture['VREF'][$key]);
