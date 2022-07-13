@@ -11,6 +11,9 @@ use EDI\Generator\Invoic\Item;
  */
 class CustomItem extends Item
 {
+
+    protected $netPrice2;
+
     /**
      * @param string $grossPrice
      * @return Item
