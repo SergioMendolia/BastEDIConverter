@@ -17,7 +17,7 @@ class CustomInvoice extends \EDI\Generator\Invoic
      */
     public function setCustomDate($invoiceDate)
     {
-        $this->invoiceDate = $this->addDTMSegment($invoiceDate, '3');
+        $this->invoiceDate = $this->addDTMSegment($invoiceDate, '137');
         return $this;
     }
 

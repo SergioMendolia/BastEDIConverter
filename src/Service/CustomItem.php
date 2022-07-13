@@ -33,6 +33,17 @@ class CustomItem extends Item
         return $this;
     }
 
+    /**
+     * @param string $netPrice
+     * @return Item
+     */
+    public function setMOANetPrice($netPrice)
+    {
+        $this->netPrice = self::addMOASegment('203', $netPrice);
+        $this->addKeyToCompose('netPrice');
+        return $this;
+    }
+
     public function setDeliveryNoteNumber($deliveryNoteNumber)
     {
         $this->deliveryNoteNumber = $this->addRFFSegment('LI', $deliveryNoteNumber);
