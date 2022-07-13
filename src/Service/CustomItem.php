@@ -39,4 +39,5 @@ class CustomItem extends Item
 
         return $this;
     }
+
 }

@@ -4,9 +4,9 @@ namespace App\Controller;
 
 use App\Form\BillType;
 use App\Service\BastaXMLCleaner;
+use App\Service\CustomInvoice;
 use App\Service\CustomItem;
 use EDI\Generator\Interchange;
-use EDI\Generator\Invoic;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;
@@ -45,7 +45,7 @@ class EdiConverterController extends AbstractController
             $edis = [];
             $facture = $arr['ROW'];
 
-            $interchange = new Interchange(' LIBRAIRIBASTA', 'VDBCUL01CHULU');
+            $interchange = new Interchange('LIBRAIRIBASTA', 'VDBCUL01CHULU');
             $interchange->setCharset('UNOC', '3');
 
                 $tz = new \DateTimeZone('Europe/Paris');
@@ -59,17 +59,17 @@ class EdiConverterController extends AbstractController
             );
 
             $date = \DateTime::createFromFormat('d m Y', $dt, $tz);
-            $orders = new Invoic(association: 'EAN008', release: '96A',);
+            $orders = new CustomInvoice(association: 'EAN008', release: '96A',);
 
             $orders
                 ->setInvoiceNumber(reset($facture['numéro_de_facture']))
-                ->setInvoiceDate($date)
+                ->setCustomDate($date)
                 ->setInvoiceCurrency('CHF')
                 ->setContactPerson($facture['Expéditeur'])
                 ->setMailAddress('chauderon@librairiebasta.ch')
                 ->setPhoneNumber('+49123456789')
                 ->setBuyerAddress('BCU', sender: 'VDBCUL01CHULU')
-                ->setSupplierAddress('Librairie Basta!', sender: ' LIBRAIRIBASTA')
+                ->setSupplierAddress('Librairie Basta!', sender: 'LIBRAIRIBASTA')
                 ->setTotalPositionsAmount($this->cleanupPriceDegueu($facture['SOUS_TOTAL_BRUT']))
                 ->setPayableAmount($this->cleanupPriceDegueu($facture['NET_A_PAYER']));
 
@@ -83,15 +83,19 @@ class EdiConverterController extends AbstractController
                         $facture[$convertArray][$key] = str_replace([',', ':', '?', ';', 'Fr.', "'"], ' ', $facture[$convertArray][$key]);
                     }
 
-
                     $item = new CustomItem();
+                    if (is_array($facture['VREF'][$key])) {
+                        $facture['VREF'][$key] = '';
+                    }
                     $item->setPosition(($key + 1), $facture['EAN'][$key] ?? $key)
                         ->setQuantity((int)$facture['QUANTITE'][$key], qualifier: '47')
                         ->setSpecificationText($facture['TITRE'][$key] . ' ' . $facture['AUTEUR'][$key] . ' (' . $facture['PRIX_UNITAIRE'][$key] . ')')
                         ->setAdditionalText('TVA' . $facture['TVA_TAUX'][$key])
                         ->setGrossPrice($this->cleanupPriceDegueu($facture['PRIX_BRUT'][$key]))
-                        ->setNetPrice($this->cleanupPriceDegueu($facture['PRIX_NET'][$key]))
-                        ->setDeliveryNoteNumber('' . $facture['NO_CPTE_BCU'][$key]);
+                        ->setNetPrice($this->cleanupPriceDegueu($facture['PRIX_NET'][$key]));
+                    if ($facture['VREF'][$key] !== '') {
+                        $item->setDeliveryNoteNumber('' . $facture['VREF'][$key]);
+                    }
                     $remise = is_array($facture['REMISE_PC'][$key]) ? '0' : $facture['REMISE_PC'][$key];
                     if ($remise > 0) {
                         $item->addDiscount($remise);
@@ -118,7 +122,6 @@ class EdiConverterController extends AbstractController
         }
 
         $existingBills = [];
-        $previousBills = [];
         $finder = new Finder();
         $finder->files()->in($facturesDir);
 
