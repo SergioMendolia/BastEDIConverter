@@ -96,10 +96,10 @@ class EdiConverterController extends AbstractController
                     if ($facture['VREF'][$key] !== '') {
                         $item->setDeliveryNoteNumber('' . $facture['VREF'][$key]);
                     }
-                    $remise = is_array($facture['REMISE_PC'][$key]) ? '0' : $facture['REMISE_PC'][$key];
-                    if ($remise > 0) {
-                        $item->addDiscount($remise);
-                    }
+                    //$remise = is_array($facture['REMISE_PC'][$key]) ? '0' : $facture['REMISE_PC'][$key];
+                    //if ($remise > 0) {
+                    //    $item->addDiscount($remise);
+                    //}
 
                     $orders->addItem($item);
                 }
