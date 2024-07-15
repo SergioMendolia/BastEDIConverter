@@ -6,6 +6,7 @@ use App\Form\BillType;
 use App\Service\BastaXMLCleaner;
 use App\Service\CustomInvoice;
 use App\Service\CustomItem;
+use Cocur\Slugify\Slugify;
 use EDI\Generator\Interchange;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -61,6 +62,10 @@ class EdiConverterController extends AbstractController
             $date = \DateTime::createFromFormat('d m Y', $dt, $tz);
             $orders = new CustomInvoice(release: '96A', association: 'EAN008',);
 
+            if(!is_string($facture['Expéditeur'])){
+                $facture['Expéditeur'] = 'Librairie BASTA!';
+            }
+
             $orders
                 ->setInvoiceNumber(reset($facture['numéro_de_facture']))
                 ->setCustomDate($date)
@@ -73,43 +78,51 @@ class EdiConverterController extends AbstractController
                 ->setTotalPositionsAmount($this->cleanupPriceDegueu($facture['SOUS_TOTAL_BRUT']))
                 ->setPayableAmount($this->cleanupPriceDegueu($facture['NET_A_PAYER']));
 
-                foreach ($facture['EAN'] as $key => $EAN) {
+            if(is_string($facture['EAN'])){
+                $convertToArrays = ['QUANTITE', 'PRIX_UNITAIRE', 'TITRE', 'EAN', 'AUTEUR', 'TVA_TAUX', 'PRIX_BRUT', 'PRIX_NET'];
 
-                    $convertArrays = ['QUANTITE', 'PRIX_UNITAIRE', 'TITRE', 'EAN', 'AUTEUR', 'TVA_TAUX', 'PRIX_BRUT', 'PRIX_NET'];
-                    foreach ($convertArrays as $convertArray) {
-                        if (is_array($facture[$convertArray][$key])) {
-                            $facture[$convertArray][$key] = null;
-                        }
-                        $facture[$convertArray][$key] = str_replace([',', ':', '?', ';', 'Fr.', "'"], ' ', $facture[$convertArray][$key]);
-                    }
-
-                    $item = new CustomItem();
-                    if (is_array($facture['VREF'][$key])) {
-                        $facture['VREF'][$key] = '';
-                    }
-                    $item->setPosition(($key + 1), $facture['EAN'][$key] ?? $key)
-                        ->setQuantity((int)$facture['QUANTITE'][$key], qualifier: '47')
-                        ->setSpecificationText($facture['TITRE'][$key] . ' ' . $facture['AUTEUR'][$key] . ' (' . $facture['PRIX_UNITAIRE'][$key] . ')')
-                        ->setAdditionalText('TVA' . $facture['TVA_TAUX'][$key])
-                        ->setGrossPrice($this->cleanupPriceDegueu($facture['PRIX_BRUT'][$key]))
-                        ->setNetPrice($this->cleanupPriceDegueu($facture['PRIX_NET'][$key]))
-                        ->setMOANetPrice($this->cleanupPriceDegueu($facture['PRIX_NET'][$key]));
-                    if ($facture['VREF'][$key] !== '') {
-                        $item->setDeliveryNoteNumber('' . $facture['VREF'][$key]);
-                    }
-                    //$remise = is_array($facture['REMISE_PC'][$key]) ? '0' : $facture['REMISE_PC'][$key];
-                    //if ($remise > 0) {
-                    //    $item->addDiscount($remise);
-                    //}
-
-                    $orders->addItem($item);
+                foreach ($convertToArrays as $convertToArray) {
+                    $facture[$convertToArray] = [$facture[$convertToArray]];
                 }
+            }
+
+            foreach ($facture['EAN'] as $key => $EAN) {
+
+                $convertArrays = ['QUANTITE', 'PRIX_UNITAIRE', 'TITRE', 'EAN', 'AUTEUR', 'TVA_TAUX', 'PRIX_BRUT', 'PRIX_NET'];
+                foreach ($convertArrays as $convertArray) {
+                    if (is_array($facture[$convertArray][$key])) {
+                        $facture[$convertArray][$key] = null;
+                    }
+                    $facture[$convertArray][$key] = str_replace([',', ':', '?', ';', 'Fr.', "'"], ' ', $facture[$convertArray][$key]);
+                }
+
+                $item = new CustomItem();
+                if (is_array($facture['VREF'][$key])) {
+                    $facture['VREF'][$key] = '';
+                }
+
+                $slugify = new Slugify();
+                $text = $slugify->slugify($facture['TITRE'][$key] . ' ' . $facture['AUTEUR'][$key],' '). ' (' . $facture['PRIX_UNITAIRE'][$key] . ')';
+
+                $item->setPosition(($key + 1), $facture['EAN'][$key] ?? $key)
+                    ->setQuantity((int)$facture['QUANTITE'][$key], qualifier: '47')
+                    ->setSpecificationText($text)
+                    ->setAdditionalText('TVA' . $facture['TVA_TAUX'][$key])
+                    ->setGrossPrice($this->cleanupPriceDegueu($facture['PRIX_BRUT'][$key]))
+                    ->setNetPrice($this->cleanupPriceDegueu($facture['PRIX_NET'][$key]))
+                    ->setMOANetPrice($this->cleanupPriceDegueu($facture['PRIX_NET'][$key]));
+
+                if ($facture['VREF'][$key] !== '') {
+                    $item->setDeliveryNoteNumber('' . $facture['VREF'][$key]);
+                }
+
+                $orders->addItem($item);
+            }
 
             $orders->compose();
             $aComposed = $interchange->addMessage($orders)->compose();
             $encoder = new \EDI\Encoder($aComposed->getComposed(), false);
             $encoder->setUNA(":+.? '");
-
 
             $edis['fact'] = $encoder->get();
 
@@ -131,8 +144,8 @@ class EdiConverterController extends AbstractController
         $finder->files()->name('*.edi');
         foreach ($finder as $file) {
             $existingBills[$file->getFilename()] = $file->getRealPath();
-
         }
+
         $finder->files()->name('*.handled');
         foreach ($finder as $file) {
             $previousBills[$file->getFilename()] = $file->getRealPath();
@@ -143,7 +156,7 @@ class EdiConverterController extends AbstractController
         return $this->renderForm('edi_converter/index.html.twig', [
             'form' => $form,
             'existing_bills' => $existingBills,
-            'previous_bills' => $previousBills,
+            'previous_bills' => $previousBills??[],
         ]);
     }
 
